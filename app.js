@@ -83,7 +83,7 @@ function initOrderFeature() {
     // Function to update total based on selected items
     function updateTotal(items) {
         const totalPrice = items.reduce((acc, curr) => acc + curr, 0);
-        document.getElementById("total").textContent = "Total: RP." + totalPrice.toFixed(3);
+        document.getElementById("total").textContent = "Total: Rp " + totalPrice.toFixed(3);
     }
 
     // Function to adjust layout on window resize
