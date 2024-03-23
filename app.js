@@ -1,5 +1,4 @@
 // shared.js
-
 // Function to adjust layout based on window width
 function adjustLayout() {
     const windowWidth = window.innerWidth;
