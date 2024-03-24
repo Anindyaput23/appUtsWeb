@@ -55,55 +55,31 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-
-// Function to initialize order feature
-function initOrderFeature() {
-    // Array to store selected items
-    let selectedItems = [];
-
-    // Item click event listener
-    document.querySelectorAll(".item").forEach(function(item) {
-        item.addEventListener("click", function() {
-            // Toggle selected class
-            this.classList.toggle("selected");
-            // Update selectedItems array
-            if (this.classList.contains("selected")) {
-                selectedItems.push(parseFloat(this.getAttribute("data-price")));
-            } else {
-                const index = selectedItems.indexOf(parseFloat(this.getAttribute("data-price")));
-                if (index !== -1) {
-                    selectedItems.splice(index, 1);
-                }
-            }
-            // Update total
-            updateTotal(selectedItems);
-        });
-    });
+document.addEventListener("DOMContentLoaded", function() {
+    const itemsContainer = document.getElementById("items");
+    const totalContainer = document.getElementById("total");
+    let totalPrice = 0;
 
     // Function to update total based on selected items
-    function updateTotal(items) {
-        const totalPrice = items.reduce((acc, curr) => acc + curr, 0);
-        document.getElementById("total").textContent = "Total: Rp " + totalPrice.toFixed(3);
+    function updateTotal() {
+        totalContainer.textContent = "Total: Rp " + totalPrice.toFixed(3).replace(/\d(?=(\d{3})+\.)/g, '$&,');
     }
 
-    // Function to adjust layout on window resize
-    window.addEventListener("resize", adjustLayout);
-    adjustLayout(); // Call adjustLayout initially
-}
-
-// Function to initialize login feature
-function initLoginFeature() {
-    // Add event listener to login form
-    document.getElementById("login-form").addEventListener("submit", handleLoginFormSubmission);
-}
-
-// Initialize features based on the current page
-document.addEventListener("DOMContentLoaded", function() {
-    if (document.getElementById("login-form")) {
-        // If login form exists on the page
-        initLoginFeature();
-    } else if (document.getElementById("items")) {
-        // If items container exists on the page
-        initOrderFeature();
+    // Function to handle item click
+    function handleClick() {
+        const price = parseFloat(this.getAttribute("data-price"));
+        totalPrice += price; // Add the price to total price
+        updateTotal(); // Update total display
+        
+        // Toggle selected class
+        if (!this.classList.contains("selected")) {
+            this.classList.add("selected");
+        }
     }
+
+    // Add click event listener to each menu item
+    itemsContainer.querySelectorAll(".item").forEach(function(item) {
+        item.addEventListener("click", handleClick);
+    });
 });
+

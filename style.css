@@ -82,10 +82,10 @@ button[type="submit"]:hover {
     box-sizing: border-box; /* Pastikan padding dan border tidak menambahkan lebar elemen */
 }
 
-.item.selected {
-    background-color: #13a35d;
-    color: #fff;
+.selected {
+    background-color: #09a10e; /* Warna hijau */
 }
+
 
 .total-container {
     margin-top: auto;
